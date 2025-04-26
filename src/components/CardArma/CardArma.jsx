@@ -1,0 +1,1 @@
+// card que se visualiza desde el inv con el tipo de arma

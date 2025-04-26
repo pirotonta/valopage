@@ -1,0 +1,1 @@
+// lo que se muestra de cada tipo de arma: detalles y skins
