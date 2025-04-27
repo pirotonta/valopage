@@ -1,34 +1,31 @@
-import { useState } from 'react'
-import {Home} from './pages/Home'
-import {Details} from './pages/Details'
-import {Favoritos} from './pages/Favoritos'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {ROUTES} from './const/routes.js'
-
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './pages/Home/Home.jsx';
+import Details from './pages/Details/Details.jsx';
+import Favoritos from './pages/Favoritos/Favoritos.jsx';
+import { ROUTES } from './const/routes.js';
 
 const router = createBrowserRouter([
   {
-    path: ROUTES.HOME,
+    path: ROUTES.Home,
     element: <Home />,
   },
   {
-    path: ROUTES.DETAILS,
+    path: ROUTES.Details,
     element: <Details />,
   },
   {
-    path: ROUTES.FAVORITES,
+    path: ROUTES.Favoritos,
     element: <Favoritos />,
   },
 ]);
-
 
 function App() {
 
   return (
     <div className="app">
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </div>
   )
 }
 
-export default App
+export default App;
