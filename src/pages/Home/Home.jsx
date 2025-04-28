@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../const/routes";
-// el header el inventario y el footer
 
 const Home = () => {
     const [armas, setArmas] = useState([]);
     const [armasFiltradas, setArmasFiltradas] = useState([]);
-    // const [favoritos, setFavoritos] = useState([])
-    // const [inventario, setInventario] = useState([])
+    const [favoritos, setFavoritos] = useState([]);
+    const [inventario, setInventario] = useState([]);
 
     const getArmas = async () => {
         try {
@@ -25,10 +24,10 @@ const Home = () => {
     }, []);
 
     return (
-        <>
+        <div>
             <h1>chumbos</h1>
-            {armas ? (
-                <div>
+            {armas.length != 0 ? (
+                <div className='center'>
                     {armas.map((arma) => (
                         <div key={arma.uuid}>
                             <h2>{arma.displayName}</h2>
@@ -41,8 +40,7 @@ const Home = () => {
             ) : (
                 <p>Cargando...</p>
             )}
-        </>
-
+        </div>
     );
 }
 
