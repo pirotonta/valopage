@@ -1,26 +1,34 @@
+import { useTranslation } from "react-i18next";
+
 const Footer = () => {
+    const { t } = useTranslation();
+
     return (
-        <div className="bg-red-900 sepia-30 h-70 flex flex-col justify-center items-center p-6 mt-4">
+        <div className="text-zinc-400 bg-zinc-950 h-70 flex flex-col justify-center items-center p-6 mt-4">
             <div className="text-center mt-5">
-                <p className="text-white text-lg font-medium">Tené en tu lista de favoritos todas aquellas skins que querés, con nosotros, con Valopage.</p>
+                <p className="text-lg font-bold">
+                    {t("footer.message")}
+                </p>
             </div>
 
             <div className="flex justify-center mt-10">
-                <p className="text-white">Página fundada por las siguientes colaboradoras:</p>
+                <p>
+                    {t("footer.collaborators")}
+                </p>
             </div>
 
             <div className="flex justify-center space-x-15">
-                <div className="flex items-center space-x-2 mt-5">
-                    <img className="w-10" src="./src/assets/github.svg" alt="icono-github" />
-                    <a className="text-white hover:underline"
+                <div className="flex items-center space-x-1 mt-2">
+                    <img className="w-15" src="./src/assets/github.svg" alt="icono-github" />
+                    <a className="font-semibold "
                         href="https://github.com/pirotonta"
                         target="_blank">
                         pirotonta
                     </a>
                 </div>
-                <div className="flex items-center space-x-2 mt-5">
-                    <img className="w-10" src="./src/assets/github.svg" alt="icono-github" />
-                    <a className="text-white hover:underline"
+                <div className="flex items-center space-x-1 mt-2">
+                    <img className="w-15" src="./src/assets/github.svg" alt="icono-github" />
+                    <a className="font-semibold "
                         href="https://github.com/MorenoGise"
                         target="_blank">
                         MorenoGise

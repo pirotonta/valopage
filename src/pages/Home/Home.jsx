@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../const/routes";
+import { useTranslation } from "react-i18next";
+import Titulo from "../../components/Titulo/Titulo";
+import CardArma from "../../components/CardArma/CardArma";
 
 const Home = () => {
     const [armas, setArmas] = useState([]);
     const [armasFiltradas, setArmasFiltradas] = useState([]);
     const [favoritos, setFavoritos] = useState([]);
     const [inventario, setInventario] = useState([]);
+    const { t } = useTranslation();
 
     const getArmas = async () => {
         try {
@@ -25,21 +27,21 @@ const Home = () => {
 
     return (
         <div>
-            <h1>chumbos</h1>
+            <Titulo texto={t("title")} />
+
             {armas.length != 0 ? (
-                <div className='center'>
+                <div className='flex flex-wrap justify-center items-center gap-6 p-6'>
                     {armas.map((arma) => (
                         <div key={arma.uuid}>
-                            <h2>{arma.displayName}</h2>
-                            <img
-                                src={arma.displayIcon}
-                            />
+                            {/* cards provisorias xd */}
+                            <CardArma nombreArma={arma.displayName} imagenArma={arma.displayIcon} />
                         </div>
                     ))}
                 </div>
             ) : (
-                <p>Cargando...</p>
+                <p>{t("loading")}</p>
             )}
+
         </div>
     );
 }

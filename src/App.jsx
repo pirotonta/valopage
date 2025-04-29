@@ -7,6 +7,8 @@ import Favoritos from './pages/Favoritos/Favoritos.jsx';
 
 import { ROUTES } from './const/routes.js';
 
+import './i18n';
+
 const router = createBrowserRouter([
   {
     path: '/',
