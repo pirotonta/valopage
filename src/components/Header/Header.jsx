@@ -37,14 +37,6 @@ const Header = () => {
                     <li className="w-50">
                         <p
                             className="cursor-pointer p-6 hover:bg-zinc-900 flex justify-center items-center"
-                            onClick={() => navigate('/details')}
-                        >
-                            {t("header.navbar.details")}
-                        </p>
-                    </li>
-                    <li className="w-50">
-                        <p
-                            className="cursor-pointer p-6 hover:bg-zinc-900 flex justify-center items-center"
                             onClick={() => navigate('/favoritos')}
                         >
                             {t("header.navbar.favorites")}

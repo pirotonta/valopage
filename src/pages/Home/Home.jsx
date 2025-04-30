@@ -1,39 +1,35 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Titulo from "../../components/Titulo/Titulo";
+import Inventario from "../../components/Inventario/Inventario";
 import CardArma from "../../components/CardArma/CardArma";
+import { getArmas } from "../../services/getArmas";
 
 const Home = () => {
     const [armas, setArmas] = useState([]);
-    const [armasFiltradas, setArmasFiltradas] = useState([]);
-    const [favoritos, setFavoritos] = useState([]);
-    const [inventario, setInventario] = useState([]);
     const { t } = useTranslation();
 
-    const getArmas = async () => {
-        try {
-            const response = await fetch("https://valorant-api.com/v1/weapons");
-            const data = await response.json();
-            setArmas(data.data);
-            setArmasFiltradas(data.data);
-        } catch (error) {
-            console.error("Error al traer las armas:", error);
-        }
-    }
-
     useEffect(() => {
-        getArmas();
+        const fetchArmas = async () => {
+            const armas = await getArmas();
+            setArmas(armas);
+        };
+        fetchArmas();
     }, []);
 
     return (
-        <div>
-            <Titulo texto={t("title")} />
+        <div className="m-10">
+
+            {/* lo comento xq todavia no anda xd */}
+            {/* {armas.length != 0 ? (
+                <Inventario armas={armas} />
+            ) : (
+                <p>{t("loading")}</p>
+            )} */}
 
             {armas.length != 0 ? (
                 <div className='flex flex-wrap justify-center items-center gap-6 p-6'>
                     {armas.map((arma) => (
                         <div key={arma.uuid}>
-                            {/* cards provisorias xd */}
                             <CardArma nombreArma={arma.displayName} imagenArma={arma.displayIcon} />
                         </div>
                     ))}
