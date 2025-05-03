@@ -46,7 +46,7 @@ const Header = () => {
 
                 <div className="relative">
                     <button
-                        className="flex gap-2 cursor-pointer items-center mr-15"
+                        className="idiomas flex gap-2 cursor-pointer items-center mr-15"
                         aria-label="cambiar idioma"
                         onClick={() => setMenuIdiomaAbierto(!menuIdiomaAbierto)}
                     >
@@ -65,7 +65,7 @@ const Header = () => {
                     </button>
 
                     {menuIdiomaAbierto && (
-                        <div className="absolute top-12 left-11 bg-zinc-800 shadow-lg rounded-lg p-2 flex flex-col z-50">
+                        <div className="idiomas absolute top-12 left-11 bg-zinc-800 shadow-lg rounded-lg p-2 flex flex-col z-50">
                             <img
                                 src="./src/assets/flag-argentina.svg"
                                 alt="ES"

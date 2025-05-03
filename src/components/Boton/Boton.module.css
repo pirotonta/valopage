@@ -1,0 +1,30 @@
+/* .boton {
+    background-color: #1e1820;
+    padding: 0.6rem;
+    margin: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.boton:hover {
+    background-color: rgb(222, 179, 219);
+    transform: scale(1.05);
+}
+
+.boton,
+.boton:hover {
+    border: 1px solid rgb(222, 179, 219);
+    border-radius: 5px;
+}
+
+.active {
+    background-color: rgb(180, 130, 176);
+    border-color: #ffffff;
+    transform: scale(1.05);
+}
+
+.active:hover {
+    background-color: rgb(222, 179, 219);
+    border-color: #ffffff;
+    transform: scale(1.05);
+} */

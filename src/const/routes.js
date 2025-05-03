@@ -1,6 +1,6 @@
 export const ROUTES = {
   Home: "/",
-  Details: "/details",
+  Details: "/details/:displayName",
   Favoritos: "/favoritos",
 //   Inventario: "/inventario",
 }
