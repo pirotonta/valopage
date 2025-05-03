@@ -9,7 +9,16 @@ Integrantes:
 
 # ୨ৎ ¿De qué trata el proyecto? ᰔ
 
-♡  En proceso...
+♡ El proyecto realizado es un simulador de inventario de Valorant, donde podés elegir un arma específica y ver todas sus respectivas skins con nombre y precio.
+Cuenta con las siguientes funcionalidades y particularidades:
+
+- Distribución de armas similar al juego, para mayor comodidad.
+- Listado de skins de cada arma en forma de tarjetas.
+- Se brindan datos adicionales de cada arma (cadencia, tiempo de recarga y más)
+- Opción de guardar en "favoritos" las skins que elijas.
+- Administrar inventario de "favoritos", eliminando de él las skins que ya no quieras ver ahí.
+- Barra de busqueda, donde podés buscar skins de un arma por su nombre.
+- Cambiar idioma de la página. Idiomas disponibles: Inglés y Español. Se guarda opción elegida.
 
 <p align="center">
     <img src="" width="1200px"/>
@@ -25,11 +34,26 @@ Integrantes:
     
 3. Acceder a la carpeta recién creada con el proyecto,
     e instalar las dependencias necesarias:
-    ```markdown
-    En proceso...
-    ```
 
-4. Ingresar en la consola los siguientes comandos:
+    ```markdown
+    # Node JS (copiar enlace)
+    https://nodejs.org/en/download
+    ```
+    ```markdown
+    # i18next (para las traducciones)
+    npm install i18next
+    ```
+    ```markdown
+    npm install react-i18next i18next-browser-languagedetector
+    ```
+    ```markdown
+    npm install i18next-http-backend
+    ```
+    ```markdown
+    # Lucide (para íconos)
+    npm install lucide-react
+    ```
+5. Ingresar en la consola los siguientes comandos:
     ```markdown
     npm install
     ```
