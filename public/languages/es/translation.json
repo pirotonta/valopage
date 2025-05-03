@@ -12,5 +12,13 @@
             "home": "INICIO",
             "favorites": "FAVORITOS"
         }
+    },
+    "card": {
+        "details": {
+            "fireRate": "Cadencia de disparo:",
+            "magazineSize": "Capacidad del cargador:",
+            "reloadTime": "Tiempo de recarga:",
+            "equipTime": "Tiempo de equipamiento:"
+        }
     }
 }

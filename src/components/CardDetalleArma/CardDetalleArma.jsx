@@ -1,13 +1,12 @@
-// lo que se muestra de cada tipo de arma: detalles y skins
-import getArmasByUUID from "../../services/getArmasByUUID";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import getArmasByUUID from "../../services/getArmasByUUID";
 import CardArma from "../CardArma/CardArma";
 
-
 const CardDetalleArma = ({ uuid }) => {
-
     const [arma, setArma] = useState(null);
     const [skin, setSkin] = useState({ displayIcon: '', displayName: '' });
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchArma = async () => {
@@ -50,19 +49,19 @@ const CardDetalleArma = ({ uuid }) => {
                 {stats && (
                     <div className="grid grid-cols-2 gap-4 text-sm bg-zinc-800 p-4 rounded-xl m-5">
                         <div>
-                            <span className="text-zinc-400">Fire Rate:</span>
+                            <span className="text-zinc-400">  {t("card.details.fireRate")}</span>
                             <div>{stats.fireRate}</div>
                         </div>
                         <div>
-                            <span className="text-zinc-400">Magazine Size:</span>
+                            <span className="text-zinc-400">  {t("card.details.magazineSize")}</span>
                             <div>{stats.magazineSize}</div>
                         </div>
                         <div>
-                            <span className="text-zinc-400">Reload Time:</span>
+                            <span className="text-zinc-400">  {t("card.details.reloadTime")}</span>
                             <div>{stats.reloadTimeSeconds}s</div>
                         </div>
                         <div>
-                            <span className="text-zinc-400">Equip Time:</span>
+                            <span className="text-zinc-400">  {t("card.details.equipTime")}</span>
                             <div>{stats.equipTimeSeconds}s</div>
                         </div>
                     </div>

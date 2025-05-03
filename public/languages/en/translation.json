@@ -12,5 +12,13 @@
             "home": "HOME",
             "favorites": "FAVORITES"
         }
+    },
+    "card": {
+        "details": {
+            "fireRate": "Fire rate:",
+            "magazineSize": "Magazine size:",
+            "reloadTime": "Reload time:",
+            "equipTime": "Equip time:"
+        }
     }
 }
