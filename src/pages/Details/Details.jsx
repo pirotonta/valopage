@@ -28,7 +28,6 @@ const Details = () => {
         navigate("/");
     }
 
-
     return (
         <div>
 

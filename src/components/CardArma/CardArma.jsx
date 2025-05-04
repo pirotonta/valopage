@@ -1,29 +1,50 @@
 import Boton from "../Boton/Boton";
 import { HeartIcon } from "lucide-react";
+import { CircleCheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
-const CardArma = ({ nombreArma, imagenArma, onClick, width = 80, height = 40, detalle = false, uuid = ''}) => {
-    const dimensiones = "w-" + width + " h-" + height;
+const CardArma = ({ nombreArma, imagenArma, onClick, size="home", detalle = false, uuid = '', 
+    tieneFavoritos = false, displayed = false, setDisplay, estamosEnFavoritos = false}) => {
     const [favorito, setFavorito] = useState(false);
 
+    const sizes = {
+        home: "w-80 h-40",
+        details: "w-full h-40",
+    };
+
+    const dimensiones = sizes[size];
+
+    useEffect(() => {
+        const faveados = JSON.parse(localStorage.getItem("favoritos") || "[]");
+        setFavorito(faveados.includes(uuid));
+    }, [uuid]);
+
     const onClickFavHandler = (uuid) => {
-        if (favorito){
-            setFavorito(false);
-        } else{
-            setFavorito(true);
+        const faveados = JSON.parse(localStorage.getItem("favoritos") || "[]");
+        let nuevosFaveados;
+
+        if (favorito) {
+            nuevosFaveados = faveados.filter(id => id !== uuid);
+        } else {
+            nuevosFaveados = [...faveados, uuid];
         }
 
-        console.log(uuid);
-        // terminar lo de favs...... me sleepi
+        localStorage.setItem("favoritos", JSON.stringify(nuevosFaveados));
+        setFavorito(!favorito);
     }
 
-
     return (
-        <div className={`${dimensiones} relative bg-gradient-to-r from-zinc-800 to-zinc-950 border border-zinc-950 shadow-md overflow-hidden group cursor-pointer`}>
-            <div className="absolute top-0 right-0 h-10 z-99">
-            {detalle ? (<Boton iconStyling={`w-6 h-6 ${favorito ? "fill-red-500" : "fill-none"} stroke-white-500 cursor-pointer`} icon={HeartIcon} 
-            onClick={() => onClickFavHandler(uuid)}/>) : (' ')}
+        <div className={`${dimensiones} relative bg-gradient-to-r from-zinc-800 to-zinc-950 border shadow-md overflow-hidden 
+        group cursor-pointer ${tieneFavoritos? 'shadow-blue-700/45 border-zinc-950' : 'border-zinc-950'}`}>
+            <div className="absolute top-[5px] right-[5px] h-10 z-99">
+            <div className="grid grid-row gap-1">
+                {detalle && (<Boton title={`${favorito ? "sacar de favoritos" : "favoritear"}`} iconStyling={`w-6 h-6 ${favorito ? "fill-red-500" : "fill-none"} stroke-white-500 cursor-pointer`} icon={HeartIcon} 
+            onClick={() => onClickFavHandler(uuid)}/>)}
+                {detalle && estamosEnFavoritos && (<Boton title={`${displayed ? "volver al default" : "usar esta skin"}`} icon={CircleCheckIcon} 
+                iconStyling={`w-6 h-6 ${displayed ? "fill-green-500" : "fill-none"} stroke-white-500 cursor-pointer`} onClick={setDisplay}/>)
+                }
+            </div>
             </div>
             <img
                 src={imagenArma}
