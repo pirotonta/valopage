@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import i18n from '../../i18n';
+import style from './Header.module.css';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -18,29 +19,39 @@ const Header = () => {
     return (
         <div className="sticky top-0 bg-zinc-950 z-50">
             <nav className="flex items-center justify-between">
-                <ul className="ml-15 flex text-zinc-400 text-lg font-semibold ">
+                <ul className="ml-15 flex text-lg font-semibold ">
 
                     <div className='flex justify-center items-center'>
-                        <img className='w-15' src='./src/assets/valorant-logo.png' />
-                        <p className="font-semibold text-3xl" >VALOPAGE</p>
+                        <NavLink
+                            to="/"
+                            className='flex items-center gap-2'
+                        >
+                            <img className='w-15' src='./src/assets/valorant-logo.png' />
+                            <p className="font-semibold text-3xl text-zinc-400">VALOPAGE</p>
+                        </NavLink>
                     </div>
 
                     <li className="ml-15 w-50">
-                        <p
-                            className="cursor-pointer p-6 hover:bg-zinc-900 flex justify-center items-center"
-                            onClick={() => navigate('/')}
+                        <NavLink
+                            to="/"
+                            end
+                            className={({ isActive }) =>
+                                `cursor-pointer p-6 flex justify-center items-center ${isActive && 'border-b-4 border-red-800 text-zinc-200 bg-zinc-900'}`
+                            }
                         >
                             {t("header.navbar.home")}
-                        </p>
-
+                        </NavLink>
                     </li>
                     <li className="w-50">
-                        <p
-                            className="cursor-pointer p-6 hover:bg-zinc-900 flex justify-center items-center"
-                            onClick={() => navigate('/favoritos')}
+                        <NavLink
+                            to="/inventory"
+                            end
+                            className={({ isActive }) =>
+                                `cursor-pointer p-6 flex justify-center items-center ${isActive && 'border-b-4 border-red-800 text-zinc-200 bg-zinc-900'}`
+                            }
                         >
-                            {t("header.navbar.favorites")}
-                        </p>
+                            {t("header.navbar.inventory")}
+                        </NavLink>
                     </li>
                 </ul>
 
@@ -65,7 +76,7 @@ const Header = () => {
                     </button>
 
                     {menuIdiomaAbierto && (
-                        <div className="idiomas absolute top-12 left-11 bg-zinc-800 shadow-lg rounded-lg p-2 flex flex-col z-50">
+                        <div className="idiomas absolute top-12 left-5 bg-zinc-800 shadow-lg rounded-lg p-2 flex flex-col z-50">
                             <img
                                 src="./src/assets/flag-argentina.svg"
                                 alt="ES"

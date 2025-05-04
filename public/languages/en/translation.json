@@ -1,7 +1,12 @@
 {
-    "home": {
-        "title": "guns",
+    "messages": {
         "loading": "Loading..."
+    },
+    "home": {
+        "title": "Find your favorite skins"
+    },
+    "inventory": {
+        "title": "Create your personalized inventory"
     },
     "footer": {
         "message": "Keep all your favorite Valorant skins in one place, with us at Valopage.",
@@ -10,7 +15,7 @@
     "header": {
         "navbar": {
             "home": "HOME",
-            "favorites": "FAVORITES"
+            "inventory": "INVENTORY"
         }
     },
     "card": {
@@ -19,6 +24,27 @@
             "magazineSize": "Magazine size:",
             "reloadTime": "Reload time:",
             "equipTime": "Equip time:"
+        },
+        "buttons": {
+            "favorite": "favorite",
+            "notFavorite": "remove favorite",
+            "equip": "equip",
+            "remove": "remove"
         }
+    },
+    "searchBar": {
+        "placeholder": "search..."
+    },
+    "favorites": {
+        "message": "You have no favorite skins of this weapon."
+    },
+    "categories": {
+        "sidearm": "SIDEARM",
+        "smg": "SMG",
+        "shotgun": "SHOTGUN",
+        "rifle": "RIFLE",
+        "melee": "MELEE",
+        "sniper": "SNIPER",
+        "heavy": "HEAVY"
     }
 }

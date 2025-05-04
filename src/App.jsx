@@ -1,4 +1,3 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Layout from './components/Layout/Layout.jsx';
 import Home from './pages/Home/Home.jsx';
@@ -19,11 +18,10 @@ function ModalRoutingApp() {
       <Routes location={backgroundLocation || location}>
         <Route element={<Layout />}>
           <Route path={ROUTES.Home} element={<Home />} />
-          <Route path={ROUTES.Favoritos} element={<Favoritos />} />
+          <Route path={ROUTES.Inventory} element={<Favoritos />} />
           <Route path={ROUTES.Details} element={<Details />} />
         </Route>
       </Routes>
-
       {backgroundLocation && (
         <Routes>
           <Route path={ROUTES.Details} element={<Details />} />
@@ -40,21 +38,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <Layout />,
-//     children: [
-//       { path: ROUTES.Home, element: <Home /> },
-//       { path: ROUTES.Details, element: <Details /> },
-//       { path: ROUTES.Favoritos, element: <Favoritos /> },
-//     ],
-//   },
-// ]);
-
-// function App() {
-//   return <RouterProvider router={router} />;
-// }
 
 export default App;

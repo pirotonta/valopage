@@ -1,7 +1,12 @@
 {
-    "home": {
-        "title": "chumbos",
+    "messages": {
         "loading": "Cargando..."
+    },
+    "home": {
+        "title": "Buscá tus skins preferidas"
+    },
+    "inventory": {
+        "title": "Creá tu inventario personalizado"
     },
     "footer": {
         "message": "Guardá todas tus skins preferidas de Valorant en un solo lugar, con nosotros, en Valopage.",
@@ -10,7 +15,7 @@
     "header": {
         "navbar": {
             "home": "INICIO",
-            "favorites": "FAVORITOS"
+            "inventory": "INVENTARIO"
         }
     },
     "card": {
@@ -19,6 +24,27 @@
             "magazineSize": "Capacidad del cargador:",
             "reloadTime": "Tiempo de recarga:",
             "equipTime": "Tiempo de equipamiento:"
+        },
+        "buttons": {
+            "favorite": "favorito",
+            "notFavorite": "quitar favorito",
+            "equip": "equipar",
+            "remove": "desequipar"
         }
+    },
+    "searchBar": {
+        "placeholder": "buscar..."
+    },
+    "favorites": {
+        "message": "No tenés skins favoritas de esta arma."
+    },
+    "categories": {
+        "sidearm": "ARMAS DE MANO",
+        "smg": "SUBAMETRALLADORAS",
+        "shotgun": "ESCOPETAS",
+        "rifle": "RIFLE",
+        "melee": "MELEE",
+        "sniper": "RIFLES DE FRANCOTIRADOR",
+        "heavy": "AMETRALLADORAS"
     }
 }

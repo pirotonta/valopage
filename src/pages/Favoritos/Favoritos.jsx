@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import CardArma from "../../components/CardArma/CardArma";
+import Titulo from "../../components/Titulo/Titulo";
 import { getArmas } from "../../services/getArmas";
 import getAgruparArmas from "../../services/getAgruparArmas";
 import Modal from "../../components/Modalcito/Modal";
@@ -51,41 +51,38 @@ const Favoritos = () => {
     }
 
     return (
-
-        // como placeholder le copie y pegue todo lo del home. la idea es que refleje si hay skins favoriteados
-        // de cada arma - señalar visualmente que los hay, y que sea posible para el usuario cambiar el arma 
-        // displayed on the card - como armar una rep visual del inventario
-          
         <div className="flex flex-col items-center justify-center w-full min-h-screen p-4">
 
+            <Titulo texto={t("inventory.title")} />
+
             {modal && <Modal cerrarModal={onClickModalHandler}>
-                <CardDetalleArma uuid={armaSeleccionada} favoritos={true} reRenderSkinDisplay={reRenderSkinDisplay}/>
+                <CardDetalleArma uuid={armaSeleccionada} favoritos={true} reRenderSkinDisplay={reRenderSkinDisplay} />
             </Modal>}
 
             {armasAgrupadas.length != 0 ? (
-                <div className='flex justify-center max-w-screen-xl w-full'>
+                <div className='mt-5 flex justify-center max-w-screen-xl w-full'>
                     <div className='flex flex-row h-full justify-center'>
                         {armasAgrupadas.map(({ columna, grupos }) => (
                             <div key={columna} className='flex flex-col'>
-                                {grupos.map(({categoria, armas}) => 
-                                <div key={categoria} className="flex flex-col gap-4 p-4 rounded-xl">
-                                    <h2 className="text-lg">{categoria.toUpperCase()}</h2>
-                                    <div >
-                                        {armas.map((arma) => {
-                                            const skinDisplayPreferida = displayFavs.find(skinGuardadita => skinGuardadita.uuid == arma.uuid);
-                                            const displayIcon = skinDisplayPreferida?.skin?.displayIcon || arma.displayIcon;
-                                            return (<div key={arma.uuid} className="mt-2">
-                                                <CardArma
-                                                    nombreArma={arma.displayName}
-                                                    imagenArma={displayIcon}
-                                                    onClick={() => onClickCardArmaHandler(arma.uuid)}
-                                                    tieneFavoritos={arma.skins?.some(skin => favoritos.includes(skin.uuid))}
-                                                />
-                                            </div>)
-                                        }
-                                        )}
+                                {grupos.map(({ categoria, armas }) =>
+                                    <div key={categoria} className="flex flex-col p-4 rounded-xl">
+                                        <h2 className="text-center text-lg text-shadow-lg"> {t(`categories.${categoria}`)}</h2>
+                                        <div >
+                                            {armas.map((arma) => {
+                                                const skinDisplayPreferida = displayFavs.find(skinGuardadita => skinGuardadita.uuid == arma.uuid);
+                                                const displayIcon = skinDisplayPreferida?.skin?.displayIcon || arma.displayIcon;
+                                                return (<div key={arma.uuid} className="mt-2">
+                                                    <CardArma
+                                                        nombreArma={arma.displayName}
+                                                        imagenArma={displayIcon}
+                                                        onClick={() => onClickCardArmaHandler(arma.uuid)}
+                                                        tieneFavoritos={arma.skins?.some(skin => favoritos.includes(skin.uuid))}
+                                                    />
+                                                </div>)
+                                            }
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
                                 )}
                             </div>
                         ))}
