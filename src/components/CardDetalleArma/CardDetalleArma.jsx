@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import getArmasByUUID from "../../services/getArmasByUUID";
 import CardArma from "../CardArma/CardArma";
+import BarraBusqueda from "../BarraBusqueda/BarraBusqueda";
 
 const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
     const [arma, setArma] = useState(null);
     const [skinDisplay, setSkinDisplay] = useState({ displayIcon: '', displayName: '', skinUuid: '' });
     const [skinElegida, setSkinElegida] = useState({ displayIcon: '', displayName: '', skinUuid: '' });
+    const [busqueda, setBusqueda] = useState("");
     const { t } = useTranslation();
     const STORAGE_KEY = "preferreddisplayskins";
 
@@ -41,12 +43,6 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
     }
 
     const favs = favoritos? JSON.parse(localStorage.getItem("favoritos") || "[]") : [];
-
-    const skinsFiltradas = arma.skins.filter(skin =>
-        skin.displayIcon &&
-        !skin.displayName.toLowerCase().includes("random") &&
-        (!favoritos || favs.includes(skin.uuid))
-    );
     
     const onClickSetDisplayHandler = (skin) => {
 
@@ -74,6 +70,20 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
             if (reRenderSkinDisplay) reRenderSkinDisplay();
     }
 
+    const busquedaHandler = (texto) => {
+        setBusqueda(texto.toLowerCase());
+    }
+
+    const skinsFiltradas = arma.skins.filter(skin =>
+        skin.displayIcon &&
+        !skin.displayName.toLowerCase().includes("random") &&
+        (!favoritos || favs.includes(skin.uuid)) &&
+        skin.displayName.toLowerCase().includes(busqueda)).sort((a, b) => {
+            if (a.uuid === skinElegida.skinUuid) return -1;
+            if (b.uuid === skinElegida.skinUuid) return 1;
+            return 0;
+        });
+
     return (
         <div className="card-detalles-arma h-full">
             <div className="nombre-arma justify-center flex">
@@ -87,26 +97,31 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
                         className="h-50 rounded-lg border my-4 p-5 border-zinc-700"
                     />
                 </div>
-                {stats && (
-                    <div className="grid grid-cols-2 gap-4 text-sm bg-zinc-800 p-4 rounded-xl m-5">
-                        <div>
-                            <span className="text-zinc-400">  {t("card.details.fireRate")}</span>
-                            <div>{stats.fireRate}</div>
-                        </div>
-                        <div>
-                            <span className="text-zinc-400">  {t("card.details.magazineSize")}</span>
-                            <div>{stats.magazineSize}</div>
-                        </div>
-                        <div>
-                            <span className="text-zinc-400">  {t("card.details.reloadTime")}</span>
-                            <div>{stats.reloadTimeSeconds}s</div>
-                        </div>
-                        <div>
-                            <span className="text-zinc-400">  {t("card.details.equipTime")}</span>
-                            <div>{stats.equipTimeSeconds}s</div>
+                    <div className="text-sm bg-zinc-800 p-4 rounded-xl m-5">
+                        {stats && (
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <span className="text-zinc-400">  {t("card.details.fireRate")}</span>
+                                    <div>{stats.fireRate}</div>
+                                </div>
+                                <div>
+                                    <span className="text-zinc-400">  {t("card.details.magazineSize")}</span>
+                                    <div>{stats.magazineSize}</div>
+                                </div>
+                                <div>
+                                    <span className="text-zinc-400">  {t("card.details.reloadTime")}</span>
+                                    <div>{stats.reloadTimeSeconds}s</div>
+                                </div>
+                                <div>
+                                    <span className="text-zinc-400">  {t("card.details.equipTime")}</span>
+                                    <div>{stats.equipTimeSeconds}s</div>
+                                </div>
+                            </div>
+                        )}
+                        <div className="place-self-center col-span-2 mt-5">
+                            <BarraBusqueda setBusqueda={busquedaHandler}/>
                         </div>
                     </div>
-                )}
             </div>
 
             <div className="skins-arma grid grid-cols-3 gap-2 p-2 bg-zinc-800 rounded-xl overflow-y-scroll max-h-96">

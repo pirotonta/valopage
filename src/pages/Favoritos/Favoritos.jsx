@@ -69,7 +69,7 @@ const Favoritos = () => {
                             <div key={columna} className='flex flex-col'>
                                 {grupos.map(({categoria, armas}) => 
                                 <div key={categoria} className="flex flex-col gap-4 p-4 rounded-xl">
-                                    <h2>{categoria.toUpperCase()}</h2>
+                                    <h2 className="text-lg">{categoria.toUpperCase()}</h2>
                                     <div >
                                         {armas.map((arma) => {
                                             const skinDisplayPreferida = displayFavs.find(skinGuardadita => skinGuardadita.uuid == arma.uuid);
