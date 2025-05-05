@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Modal from "../Modalcito/Modal"
 
 const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = false, uuid = '',
-    tieneFavoritos = false, displayed = false, setDisplay, estamosEnFavoritos = false, reRenderFavs = null}) => {
+    tieneFavoritos = false, displayed = false, setDisplay, estamosEnFavoritos = false, reRenderFavs = null }) => {
 
     const [favorito, setFavorito] = useState(false);
     const [unequipModal, setUnequipModal] = useState(false);
@@ -26,7 +26,7 @@ const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = fa
 
     const onClickFavHandler = (uuid) => {
 
-        if (favorito && displayed){
+        if (favorito && displayed) {
             setUnequipModal(true);
             return;
         }
@@ -77,7 +77,7 @@ const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = fa
                 className="absolute inset-0 w-full h-full object-contain p-4 z-10 transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1"
                 onClick={onClick}
             />
-            <div className="absolute bottom-0 left-0 w-full bg-zinc-950 px-4 py-1 z-20 group-hover:bg-black/40">
+            <div className="absolute bottom-0 left-0 w-full bg-black/40  px-4 py-1 z-20 group-hover:bg-zinc-950">
                 <h3 className="text-white text-sm tracking-widest">{nombreArma.toUpperCase()}</h3>
             </div>
         </div>

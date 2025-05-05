@@ -1,16 +1,15 @@
 {
     "messages": {
-        "loading": "Loading...",
-        "noSkinFound": "We didn't find any matches for your search"
+        "loading": "Loading..."
     },
     "home": {
         "title": "Find your favorite skins"
     },
     "inventory": {
-        "title": "Create your personalized inventory"
+        "title": "Customize your inventory"
     },
     "footer": {
-        "message": "Keep all your favorite Valorant skins in one place, with us at Valopage.",
+        "message": "Keep all your favorite Valorant skins in one place, with us at VALOPAGE.",
         "collaborators": "Page created by the collaborators:"
     },
     "header": {
@@ -32,15 +31,16 @@
             "equip": "equip",
             "remove": "remove"
         },
-        "messages":{
-            "mustUnequip": "You must unequip the weapon before removing it from Favorites"
+        "messages": {
+            "mustUnequip": "You must unequip the weapon before removing it from favorites"
         }
     },
     "searchBar": {
-        "placeholder": "search..."
+        "placeholder": "search skin..."
     },
     "favorites": {
-        "message": "You have no favorite skins of this weapon."
+        "message": "You have no favorite skins of this weapon",
+        "noSkinFound": "No matches found"
     },
     "categories": {
         "sidearm": "SIDEARM",
@@ -51,7 +51,7 @@
         "sniper": "SNIPER",
         "heavy": "HEAVY"
     },
-    "notFound":{
+    "notFound": {
         "message": "Didn't find anything here!"
     }
 }

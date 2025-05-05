@@ -25,10 +25,10 @@ const Header = () => {
                     <div className='flex justify-center items-center'>
                         <NavLink
                             to="/"
-                            className='flex items-center gap-2'
+                            className='flex items-center transition-transform duration-300 hover:scale-105'
                         >
                             <img className='w-15' src='https://i.imgur.com/D1KD0mW.png' />
-                            <p className="font-semibold text-3xl text-zinc-400">VALOPAGE</p>
+                            <img className='mt-1 w-60' src='https://i.imgur.com/XRZn3gu.png' />
                         </NavLink>
                     </div>
 
@@ -76,7 +76,7 @@ const Header = () => {
                     </button>
 
                     {menuIdiomaAbierto && (
-                        <div className="idiomas absolute top-12 left-5 bg-zinc-800 shadow-lg rounded-lg p-2 flex flex-col z-50">
+                        <div className="idiomas absolute top-13 left-7 bg-zinc-800 shadow-lg rounded-lg p-2 flex flex-col z-50">
                             <img
                                 src="https://i.imgur.com/L5XPRMA.png"
                                 alt="ES"

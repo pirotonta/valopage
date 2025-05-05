@@ -1,16 +1,15 @@
 {
     "messages": {
-        "loading": "Cargando...",
-        "noSkinFound": "No encontramos coincidencias para la búsqueda"
+        "loading": "Cargando..."
     },
     "home": {
         "title": "Buscá tus skins preferidas"
     },
     "inventory": {
-        "title": "Creá tu inventario personalizado"
+        "title": "Personalizá tu inventario"
     },
     "footer": {
-        "message": "Guardá todas tus skins preferidas de Valorant en un solo lugar, con nosotros, en Valopage.",
+        "message": "Guardá todas tus skins preferidas de Valorant en un solo lugar, con nosotros, en VALOPAGE.",
         "collaborators": "Página creada por las colaboradoras:"
     },
     "header": {
@@ -32,15 +31,16 @@
             "equip": "equipar",
             "remove": "desequipar"
         },
-        "messages":{
-            "mustUnequip": "Debe desequipar el arma para eliminarla de favoritos"
+        "messages": {
+            "mustUnequip": "Debés desequipar el arma para eliminarla de favoritos"
         }
     },
     "searchBar": {
-        "placeholder": "buscar..."
+        "placeholder": "buscar skin..."
     },
     "favorites": {
-        "message": "No tenés skins favoritas de esta arma."
+        "message": "No tenés skins favoritas de esta arma",
+        "noSkinFound": "No se encontraron coincidencias"
     },
     "categories": {
         "sidearm": "ARMAS DE MANO",
@@ -51,7 +51,7 @@
         "sniper": "RIFLES DE FRANCOTIRADOR",
         "heavy": "AMETRALLADORAS"
     },
-    "notFound":{
+    "notFound": {
         "message": "No se encontró la ruta solicitada"
     }
 }
