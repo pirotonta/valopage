@@ -9,6 +9,8 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
     const [skinDisplay, setSkinDisplay] = useState({ displayIcon: '', displayName: '', skinUuid: '' });
     const [skinElegida, setSkinElegida] = useState({ displayIcon: '', displayName: '', skinUuid: '' });
     const [busqueda, setBusqueda] = useState("");
+    const [listaFavs, setListaFavs] = useState([]);
+    const [actualizarFavs, setActualizarFavs] = useState(false);
     const { t } = useTranslation();
     const STORAGE_KEY = "preferreddisplayskins";
 
@@ -16,21 +18,38 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
         const fetchArma = async () => {
             const armaData = await getArmasByUUID(uuid);
             setArma(armaData);
-            const defaultSkin = armaData.displayIcon;
-            if (defaultSkin) {
-                if (favoritos) {
-                    const skinsGlobal = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-                    const guardada = skinsGlobal.find(skinGlobal => skinGlobal.uuid === uuid);
-
-                    const skinElegida = guardada?.skin || { displayIcon: defaultSkin, displayName: armaData.displayName, skinUuid: armaData.defaultSkinUuid };
-
-                    setSkinDisplay(skinElegida);
-                    setSkinElegida(skinElegida);
-                } else setSkinDisplay({ displayIcon: defaultSkin, displayName: armaData.displayName, skinUuid: armaData.defaultSkinUuid });
-            }
         };
         fetchArma();
     }, [uuid]);
+
+    useEffect(() => {
+        if (!arma) return;
+    
+        const skinDefault = {
+            displayIcon: arma.displayIcon,
+            displayName: arma.displayName,
+            skinUuid: arma.defaultSkinUuid
+        };
+    
+        if (favoritos) {
+            const skinsGlobal = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+            const guardada = skinsGlobal.find(skin => skin.uuid === uuid);
+            const equipada = guardada?.skin || skinDefault;
+    
+            setSkinDisplay(equipada);
+            setSkinElegida(equipada);
+        } else {
+            setSkinDisplay(skinDefault);
+            setSkinElegida(skinDefault);
+        }
+    }, [arma, listaFavs]);
+    
+    useEffect(() => {
+        if (favoritos) {
+            const favs = JSON.parse(localStorage.getItem("favoritos") || "[]");
+            setListaFavs(favs);
+        }
+    }, [favoritos, actualizarFavs]);
 
     if (!arma) return <div>{t("messages.loading")}</div>;
 
@@ -42,7 +61,9 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
         } else setSkinDisplay({ displayIcon: skin.displayIcon, displayName: skin.displayName, skinUuid: skin.uuid });
     }
 
-    const favs = favoritos ? JSON.parse(localStorage.getItem("favoritos") || "[]") : [];
+    const reRenderFavs = () => {
+        setActualizarFavs(prev => !prev)
+    };
 
     const onClickSetDisplayHandler = (skin) => {
 
@@ -77,25 +98,29 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
     const skinsFiltradas = arma.skins.filter(skin =>
         skin.displayIcon &&
         !skin.displayName.toLowerCase().includes("random") &&
-        (!favoritos || favs.includes(skin.uuid)) &&
+        (!favoritos || listaFavs.includes(skin.uuid)) &&
         skin.displayName.toLowerCase().includes(busqueda)).sort((a, b) => {
             if (a.uuid === skinElegida.skinUuid) return -1;
             if (b.uuid === skinElegida.skinUuid) return 1;
             return 0;
-        });
+        })
+
+
 
     return (
         <div className="card-detalles-arma h-full">
-            <div className="nombre-arma justify-center flex">
-                {skinDisplay.displayName}
+            <div className="text-2xl nombre-arma justify-center flex my-5">
+                {skinDisplay.displayName.toUpperCase()}
             </div>
             <div className="flex flex-col lg:flex-row gap-6 items-center justify-center mb-5">
-                <div className="flex skin-seleccionada items-center justify-center">
-                    <img
+                <div className="flex h-50 w-150 skin-seleccionada items-center justify-center">
+                    {skinDisplay.displayIcon ? (
+                        <img
                         src={skinDisplay.displayIcon}
                         alt={`${skinDisplay.displayName} skin`}
-                        className="h-50 rounded-lg border my-4 p-5 border-zinc-700"
+                        className="w-full h-full object-contain rounded-lg border my-4 p-5 border-zinc-700"
                     />
+                    ) : null}
                 </div>
                 <div className="text-sm bg-zinc-800 p-4 rounded-xl m-5">
                     {stats && (
@@ -125,26 +150,26 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
             </div>
 
             <div className="skins-arma grid grid-cols-3 gap-2 p-2 bg-zinc-800 rounded-xl overflow-y-scroll max-h-96">
-                {(favoritos && skinsFiltradas.length === 0) ? (
-                    <div>{t("favorites.message")}</div>
+                {(skinsFiltradas.length === 0) ? (
+                    <div>{busqueda ? t("messages.noSkinFound") : t("favorites.message")}</div>
                 ) : (
                     skinsFiltradas.map((skin, index) => {
                         const seleccionada = skin.uuid === skinDisplay.skinUuid;
                         const onDisplay = skin.uuid === skinElegida.skinUuid;
                         return (
                             <div key={index} className={`flex rounded-md overflow-hidden border-2 transition duration-200 max-h-60 
-                            ${seleccionada ? "border-blue-500" : "border-transparent"}`}>
+                            ${seleccionada ? "border-red-800" : "border-transparent"}`}>
                                 {skin.uuid === arma.defaultSkinUuid ? (
                                     <CardArma nombreArma={`Standard ${arma.displayName}`} imagenArma={arma.displayIcon} size="details"
                                         onClick={() => onClickSkinHandler(skin)} detalle={true} uuid={skin.uuid}
                                         setDisplay={() => onClickSetDisplayHandler(skin)} displayed={onDisplay}
-                                        estamosEnFavoritos={favoritos}
+                                        estamosEnFavoritos={favoritos} reRenderFavs={reRenderFavs}
                                     />
                                 ) : (
                                     <CardArma nombreArma={skin.displayName} imagenArma={skin.displayIcon} size="details"
                                         onClick={() => onClickSkinHandler(skin)} detalle={true} uuid={skin.uuid}
                                         setDisplay={() => onClickSetDisplayHandler(skin)} displayed={onDisplay}
-                                        estamosEnFavoritos={favoritos} />
+                                        estamosEnFavoritos={favoritos} reRenderFavs={reRenderFavs} />
                                 )}
                             </div>
                         );

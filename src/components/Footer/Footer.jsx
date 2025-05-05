@@ -19,7 +19,7 @@ const Footer = () => {
 
             <div className="flex justify-center space-x-15">
                 <div className="flex items-center space-x-1 mt-2">
-                    <img className="w-15" src="./src/assets/github.svg" alt="icono-github" />
+                    <img className="w-15" src="https://i.imgur.com/3RlDwQF.png" alt="icono-github" />
                     <a className="font-semibold "
                         href="https://github.com/pirotonta"
                         target="_blank">
@@ -27,7 +27,7 @@ const Footer = () => {
                     </a>
                 </div>
                 <div className="flex items-center space-x-1 mt-2">
-                    <img className="w-15" src="./src/assets/github.svg" alt="icono-github" />
+                    <img className="w-15" src="https://i.imgur.com/3RlDwQF.png" alt="icono-github" />
                     <a className="font-semibold "
                         href="https://github.com/MorenoGise"
                         target="_blank">

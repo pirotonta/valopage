@@ -1,6 +1,7 @@
 {
     "messages": {
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "noSkinFound": "We didn't find any matches for your search"
     },
     "home": {
         "title": "Find your favorite skins"
@@ -30,6 +31,9 @@
             "notFavorite": "remove favorite",
             "equip": "equip",
             "remove": "remove"
+        },
+        "messages":{
+            "mustUnequip": "You must unequip the weapon before removing it from Favorites"
         }
     },
     "searchBar": {
@@ -46,5 +50,8 @@
         "melee": "MELEE",
         "sniper": "SNIPER",
         "heavy": "HEAVY"
+    },
+    "notFound":{
+        "message": "Didn't find anything here!"
     }
 }

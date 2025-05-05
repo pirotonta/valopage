@@ -3,11 +3,13 @@ import { useTranslation } from "react-i18next";
 import { HeartIcon } from "lucide-react";
 import { CircleCheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import Modal from "../Modalcito/Modal"
 
 const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = false, uuid = '',
-    tieneFavoritos = false, displayed = false, setDisplay, estamosEnFavoritos = false }) => {
+    tieneFavoritos = false, displayed = false, setDisplay, estamosEnFavoritos = false, reRenderFavs = null}) => {
 
     const [favorito, setFavorito] = useState(false);
+    const [unequipModal, setUnequipModal] = useState(false);
     const { t } = useTranslation();
 
     const sizes = {
@@ -23,6 +25,12 @@ const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = fa
     }, [uuid]);
 
     const onClickFavHandler = (uuid) => {
+
+        if (favorito && displayed){
+            setUnequipModal(true);
+            return;
+        }
+
         const faveados = JSON.parse(localStorage.getItem("favoritos") || "[]");
         let nuevosFaveados;
 
@@ -34,20 +42,21 @@ const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = fa
 
         localStorage.setItem("favoritos", JSON.stringify(nuevosFaveados));
         setFavorito(!favorito);
+
+        if (reRenderFavs) reRenderFavs();
     }
 
     return (
-        <div
-            className={`${dimensiones} relative overflow-hidden group cursor-pointer 
-          ${tieneFavoritos ? 'border-b-4 border-red-800' : 'border-zinc-950'}`}
-        >
+        <div className={`${dimensiones} relative overflow-hidden group cursor-pointer 
+          ${tieneFavoritos ? 'border-b-4 border-red-800' : 'border-zinc-950'}`}>
+            {unequipModal && <Modal cerrarModal={() => setUnequipModal(false)} chiquito={true}>{t("card.messages.mustUnequip")}</Modal>}
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-zinc-950 opacity-90 z-0" />
             <div className="absolute top-[5px] right-[5px] h-10 z-30">
                 <div className="grid grid-row gap-1">
                     {detalle && (
                         <Boton
                             title={`${favorito ? t("card.buttons.notFavorite") : t("card.buttons.favorite")}`}
-                            iconStyling={`w-6 h-6 ${favorito ? "fill-red-500" : "fill-none"} stroke-white-500 cursor-pointer`}
+                            iconStyling={`w-6 h-6 ${favorito ? "fill-red-800/75" : "fill-none"} duration-300 transition hover:fill-red-400/50 stroke-red-800 cursor-pointer`}
                             icon={HeartIcon}
                             onClick={() => onClickFavHandler(uuid)}
                         />
@@ -56,7 +65,7 @@ const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = fa
                         <Boton
                             title={`${displayed ? t("card.buttons.remove") : t("card.buttons.equip")}`}
                             icon={CircleCheckIcon}
-                            iconStyling={`w-6 h-6 ${displayed ? "fill-green-500" : "fill-none"} stroke-white-500 cursor-pointer`}
+                            iconStyling={`w-6 h-6 ${displayed ? "fill-red-800/50 stroke-red-800" : "fill-none"} stroke-red-800 cursor-pointer`}
                             onClick={setDisplay}
                         />
                     )}

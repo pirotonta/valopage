@@ -1,6 +1,7 @@
 {
     "messages": {
-        "loading": "Cargando..."
+        "loading": "Cargando...",
+        "noSkinFound": "No encontramos coincidencias para la búsqueda"
     },
     "home": {
         "title": "Buscá tus skins preferidas"
@@ -30,6 +31,9 @@
             "notFavorite": "quitar favorito",
             "equip": "equipar",
             "remove": "desequipar"
+        },
+        "messages":{
+            "mustUnequip": "Debe desequipar el arma para eliminarla de favoritos"
         }
     },
     "searchBar": {
@@ -46,5 +50,8 @@
         "melee": "MELEE",
         "sniper": "RIFLES DE FRANCOTIRADOR",
         "heavy": "AMETRALLADORAS"
+    },
+    "notFound":{
+        "message": "No se encontró la ruta solicitada"
     }
 }
