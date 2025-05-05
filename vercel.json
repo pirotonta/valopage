@@ -1,3 +1,15 @@
 {
-    "rewrites": [{ "source": "(.*)", "destination": "/404" }]
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/404",
+        "destination": "/404.html",
+        "statusCode": 404
+      }
+    ]
   }
