@@ -1,6 +1,6 @@
 ───────────────────────────────୨ৎ───────────────────────────────
 # *TP 2 - React 𖹭.ᐟ* 
-<!-- [¡Click para ejecutarlo en Vercel! ૮₍ ´ ꒳ `₎ა](https:) -->
+[¡Click para ejecutarlo en Vercel! ૮₍ ´ ꒳ `₎ა](https://valopage.vercel.app/)
 
 # ୨ৎ Grupo "corazon" ᰔ
 Integrantes:                           
@@ -9,7 +9,7 @@ Integrantes:
 
 # ୨ৎ ¿De qué trata el proyecto? ᰔ
 
-♡ El proyecto realizado es un simulador de inventario de Valorant, donde podés elegir un arma específica y ver todas sus respectivas skins con nombre y precio.
+♡ El proyecto realizado es un simulador de inventario de Valorant, donde podés elegir un arma específica y ver todas sus respectivas skins.
 Cuenta con las siguientes funcionalidades y particularidades:
 
 - Distribución de armas similar al juego, para mayor comodidad.
