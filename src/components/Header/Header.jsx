@@ -6,10 +6,8 @@ import { ChevronDown } from 'lucide-react';
 import style from './Header.module.css';
 
 const Header = () => {
-    const navigate = useNavigate();
     const { t } = useTranslation();
     const [idiomaActual, setIdiomaActual] = useState(i18n.language);
-    const [menuIdiomaAbierto, setMenuIdiomaAbierto] = useState(false);
 
     const cambiarIdioma = (idioma) => {
         i18n.changeLanguage(idioma);
@@ -56,41 +54,18 @@ const Header = () => {
                     </li>
                 </ul>
 
-                <div className="relative">
-                    <button
-                        className="idiomas flex gap-2 cursor-pointer items-center mr-15"
-                        aria-label="cambiar idioma"
-                        onClick={() => setMenuIdiomaAbierto(!menuIdiomaAbierto)}
+                <div className="relative mr-15 w-fit">
+                    <select
+                        className="bg-zinc-800 text-white rounded-md px-4 py-2 pr-10 border border-zinc-700 focus:outline-none hover:bg-zinc-700 cursor-pointer appearance-none"
+                        value={idiomaActual}
+                        onChange={(e) => cambiarIdioma(e.target.value)}
+                        aria-label="Seleccionar idioma"
                     >
-                        <img
-                            src={
-                                idiomaActual === 'es'
-                                    ? 'https://i.imgur.com/L5XPRMA.png'
-                                    : 'https://i.imgur.com/ltU5ujL.png'
-                            }
-                            className="w-7"
-                        />
-                        <ChevronDown
-                            className="w-5 stroke-4"
-                        />
-                    </button>
+                        <option value="es">ES</option>
+                        <option value="en">EN</option>
+                    </select>
 
-                    {menuIdiomaAbierto && (
-                        <div className="idiomas absolute top-13 left-7 bg-zinc-800 shadow-lg rounded-lg p-2 flex flex-col z-50">
-                            <img
-                                src="https://i.imgur.com/L5XPRMA.png"
-                                alt="ES"
-                                className="w-7 cursor-pointer hover:opacity-70"
-                                onClick={() => cambiarIdioma("es")}
-                            />
-                            <img
-                                src="https://i.imgur.com/ltU5ujL.png"
-                                alt="EN"
-                                className="w-7 cursor-pointer hover:opacity-70 mt-2"
-                                onClick={() => cambiarIdioma("en")}
-                            />
-                        </div>
-                    )}
+                    <ChevronDown className="pointer-events-none absolute right-3 top-2.5" />
                 </div>
             </nav>
         </div>
