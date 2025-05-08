@@ -1,4 +1,4 @@
-import { useNavigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import i18n from '../../i18n';
@@ -12,7 +12,6 @@ const Header = () => {
     const cambiarIdioma = (idioma) => {
         i18n.changeLanguage(idioma);
         setIdiomaActual(idioma);
-        setMenuIdiomaAbierto(false);
     };
 
     return (
