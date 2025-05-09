@@ -4,13 +4,11 @@ import getArmasByUUID from "../../services/getArmasByUUID";
 import CardArma from "../CardArma/CardArma";
 import BarraBusqueda from "../BarraBusqueda/BarraBusqueda";
 
-const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
+const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay, listaFavoritos = [], favoritosHandler }) => {
     const [arma, setArma] = useState(null);
     const [skinDisplay, setSkinDisplay] = useState({ displayIcon: '', displayName: '', skinUuid: '' });
     const [skinElegida, setSkinElegida] = useState({ displayIcon: '', displayName: '', skinUuid: '' });
     const [busqueda, setBusqueda] = useState("");
-    const [listaFavs, setListaFavs] = useState([]);
-    const [actualizarFavs, setActualizarFavs] = useState(false);
     const { t } = useTranslation();
     const STORAGE_KEY = "preferreddisplayskins";
 
@@ -42,14 +40,8 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
             setSkinDisplay(skinDefault);
             setSkinElegida(skinDefault);
         }
-    }, [arma, listaFavs]);
+    }, [arma]);
 
-    useEffect(() => {
-        if (favoritos) {
-            const favs = JSON.parse(localStorage.getItem("favoritos") || "[]");
-            setListaFavs(favs);
-        }
-    }, [favoritos, actualizarFavs]);
 
     if (!arma) return <div>{t("messages.loading")}</div>;
 
@@ -60,10 +52,6 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
             setSkinDisplay({ displayIcon: arma.displayIcon, displayName: arma.displayName, skinUuid: arma.defaultSkinUuid })
         } else setSkinDisplay({ displayIcon: skin.displayIcon, displayName: skin.displayName, skinUuid: skin.uuid });
     }
-
-    const reRenderFavs = () => {
-        setActualizarFavs(prev => !prev)
-    };
 
     const onClickSetDisplayHandler = (skin) => {
 
@@ -95,10 +83,12 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
         setBusqueda(texto.toLowerCase());
     }
 
+    const esFavorito = (uuid) => listaFavoritos.includes(uuid);
+
     const skinsFiltradas = arma.skins.filter(skin =>
         skin.displayIcon &&
         !skin.displayName.toLowerCase().includes("random") &&
-        (!favoritos || listaFavs.includes(skin.uuid)) &&
+        (!favoritos || listaFavoritos.includes(skin.uuid)) &&
         skin.displayName.toLowerCase().includes(busqueda)).sort((a, b) => {
             if (a.uuid === skinElegida.skinUuid) return -1;
             if (b.uuid === skinElegida.skinUuid) return 1;
@@ -156,6 +146,7 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
                     skinsFiltradas.map((skin, index) => {
                         const seleccionada = skin.uuid === skinDisplay.skinUuid;
                         const onDisplay = skin.uuid === skinElegida.skinUuid;
+                        const favorito = esFavorito(skin.uuid);
                         return (
                             <div key={index} className={`flex overflow-hidden border-2 transition duration-200 max-h-60 
                             ${seleccionada ? "border-red-800" : "border-transparent"}`}>
@@ -163,13 +154,16 @@ const CardDetalleArma = ({ uuid, favoritos = false, reRenderSkinDisplay }) => {
                                     <CardArma nombreArma={`Standard ${arma.displayName}`} imagenArma={arma.displayIcon} size="details"
                                         onClick={() => onClickSkinHandler(skin)} detalle={true} uuid={skin.uuid}
                                         setDisplay={() => onClickSetDisplayHandler(skin)} displayed={onDisplay}
-                                        estamosEnFavoritos={favoritos} reRenderFavs={reRenderFavs}
+                                        estamosEnFavoritos={favoritos}
+                                        favorito = {favorito} listaFavoritos = {listaFavoritos} favoritosHandler={favoritosHandler}
                                     />
                                 ) : (
                                     <CardArma nombreArma={skin.displayName} imagenArma={skin.displayIcon} size="details"
                                         onClick={() => onClickSkinHandler(skin)} detalle={true} uuid={skin.uuid}
                                         setDisplay={() => onClickSetDisplayHandler(skin)} displayed={onDisplay}
-                                        estamosEnFavoritos={favoritos} reRenderFavs={reRenderFavs} />
+                                        estamosEnFavoritos={favoritos} 
+                                        favorito = {favorito} listaFavoritos = {listaFavoritos} favoritosHandler={favoritosHandler}                                        
+                                        />
                                 )}
                             </div>
                         );

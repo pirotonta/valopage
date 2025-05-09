@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import Modal from "../Modalcito/Modal"
 
 const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = false, uuid = '',
-    tieneFavoritos = false, displayed = false, setDisplay, estamosEnFavoritos = false, reRenderFavs = null }) => {
+    tieneFavoritos = false, displayed = false, setDisplay, estamosEnFavoritos = false,
+    favorito = false, listaFavoritos = [], favoritosHandler }) => {
 
-    const [favorito, setFavorito] = useState(false);
     const [unequipModal, setUnequipModal] = useState(false);
     const { t } = useTranslation();
 
@@ -18,33 +18,6 @@ const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = fa
     };
 
     const dimensiones = sizes[size];
-
-    useEffect(() => {
-        const faveados = JSON.parse(localStorage.getItem("favoritos") || "[]");
-        setFavorito(faveados.includes(uuid));
-    }, [uuid]);
-
-    const onClickFavHandler = (uuid) => {
-
-        if (favorito && displayed) {
-            setUnequipModal(true);
-            return;
-        }
-
-        const faveados = JSON.parse(localStorage.getItem("favoritos") || "[]");
-        let nuevosFaveados;
-
-        if (favorito) {
-            nuevosFaveados = faveados.filter(id => id !== uuid);
-        } else {
-            nuevosFaveados = [...faveados, uuid];
-        }
-
-        localStorage.setItem("favoritos", JSON.stringify(nuevosFaveados));
-        setFavorito(!favorito);
-
-        if (reRenderFavs) reRenderFavs();
-    }
 
     return (
         <div className={`${dimensiones} relative overflow-hidden group cursor-pointer 
@@ -58,7 +31,7 @@ const CardArma = ({ nombreArma, imagenArma, onClick, size = "home", detalle = fa
                             title={`${favorito ? t("card.buttons.notFavorite") : t("card.buttons.favorite")}`}
                             iconStyling={`w-6 h-6 ${favorito ? "fill-red-800/75" : "fill-none"} duration-300 transition hover:fill-red-400/50 stroke-red-800 cursor-pointer`}
                             icon={HeartIcon}
-                            onClick={() => onClickFavHandler(uuid)}
+                            onClick={() => {displayed ? setUnequipModal(true) : favoritosHandler(uuid)}}
                         />
                     )}
                     {detalle && estamosEnFavoritos && (

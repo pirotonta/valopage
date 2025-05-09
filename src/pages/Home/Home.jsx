@@ -7,7 +7,6 @@ import { getArmas } from "../../services/getArmas";
 import getAgruparArmas from "../../services/getAgruparArmas";
 
 const Home = () => {
-    const [armas, setArmas] = useState([]);
     const [armasAgrupadas, setArmasAgrupadas] = useState([])
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -17,7 +16,6 @@ const Home = () => {
         const fetchArmas = async () => {
             const armas = await getArmas();
             const armasAgrupadas = getAgruparArmas(armas);
-            setArmas(armas);
             setArmasAgrupadas(armasAgrupadas);
         };
         fetchArmas();
